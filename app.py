@@ -2,6 +2,9 @@ import streamlit as st
 import cv2
 import numpy as np
 import mediapipe as mp
+# Добавь эту строку принудительно ниже, чтобы "протолкнуть" модули
+import mediapipe.python.solutions.pose as mp_pose_module
+import mediapipe.python.solutions.drawing_utils as mp_drawing_module
 import math
 import json
 from openai import OpenAI
@@ -235,7 +238,14 @@ for k, v in defaults.items():
         st.session_state[k] = v
 
 # ─── MEDIAPIPE SETUP ─────────────────────────────────────────────────────────────
+# Вместо старого блока используй этот:
 mp_pose = mp.solutions.pose
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+
+# Если ошибка останется, попробуй заменить mp.solutions на прямые ссылки:
+# mp_pose = mp_pose_module
+# mp_drawing = mp_drawing_module
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
