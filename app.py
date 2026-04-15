@@ -2,11 +2,6 @@ import streamlit as st
 import cv2
 import mediapipe as mp
 import numpy as np
-import math
-import json
-from openai import OpenAI
-from streamlit_webrtc import webrtc_streamer
-import av
 # ─── PAGE CONFIG ────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="DUNK LAB",
@@ -234,18 +229,14 @@ for k, v in defaults.items():
         st.session_state[k] = v
 
 # ─── MEDIAPIPE SETUP ─────────────────────────────────────────────────────────────
-# Вместо старого блока используй этот:
-# Настройка MediaPipe
-try:
-    mp_pose = mp.solutions.pose
-    mp_drawing = mp.solutions.drawing_utils
-    mp_drawing_styles = mp.solutions.drawing_styles
-except AttributeError:
-    st.error("Ошибка загрузки MediaPipe. Попробуйте перезагрузить страницу.")
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
+# --- МЕДИАПАЙП СЕТАП ---
+import mediapipe.python.solutions.pose as pose_solution
+import mediapipe.python.solutions.drawing_utils as drawing_utils_solution
+import mediapipe.python.solutions.drawing_styles as drawing_styles_solution
 
-# Если ошибка останется, попробуй заменить mp.solutions на прямые ссылки:
+mp_pose = pose_solution
+mp_drawing = drawing_utils_solution
+mp_drawing_styles = drawing_styles_solution
 # mp_pose = mp_pose_module
 # mp_drawing = mp_drawing_module
 mp_drawing = mp.solutions.drawing_utils
