@@ -4,3 +4,4 @@ opencv-python-headless
 streamlit-webrtc
 av
 openai
+mediapipe==0.10.14
